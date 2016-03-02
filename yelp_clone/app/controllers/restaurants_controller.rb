@@ -1,4 +1,6 @@
 class RestaurantsController < ApplicationController
+  before_action :authenticate_user!, :except => [:index, :show]
+
   def index
     @restaurants = Restaurant.all
     @reviews = Review.all
@@ -30,5 +32,5 @@ class RestaurantsController < ApplicationController
    @restaurant.destroy
    flash[:notice] = 'Restaurant deleted successfully'
    redirect_to '/restaurants'
- end
+  end
 end
