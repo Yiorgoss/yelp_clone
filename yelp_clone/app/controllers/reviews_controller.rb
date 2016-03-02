@@ -1,9 +1,12 @@
 class ReviewsController < ApplicationController
+  include ReviewsHelper
   def new
-    @restaurant = Restaurant.find(params[:restaurant_id])
+
     if current_user.has_reviewed? @restaurant
       flash[:notice] = 'You have already reviewed this restaurant'
     end
+
+    @restaurant = Restaurant.find(params[:restaurant_id])
     @review = Review.new
   end
 
@@ -14,8 +17,8 @@ class ReviewsController < ApplicationController
   # end
 
   def create
-  @restaurant = Restaurant.find review_params[:restaurant_id]
-  @review = @restaurant.build_review review_params, current_user
+  @restaurant = Restaurant.find(params[:restaurant_id])
+  @review = @restaurant.build_review(review_params, current_user)
 
   if @review.save
     redirect_to restaurants_path
@@ -30,6 +33,7 @@ class ReviewsController < ApplicationController
     end
   end
 end
+
 
   def review_params
     params.require(:review).permit(:thoughts, :rating)
