@@ -1,4 +1,5 @@
 class RestaurantsController < ApplicationController
+  include WithUserAssociationExtension
   before_action :authenticate_user!, :except => [:index, :show]
 
   def index
@@ -34,5 +35,4 @@ class RestaurantsController < ApplicationController
    redirect_to '/restaurants'
   end
 
-  
 end

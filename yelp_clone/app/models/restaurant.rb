@@ -1,4 +1,5 @@
 class Restaurant < ActiveRecord::Base
+  include WithUserAssociationExtension
   validates :name, length: {minimum: 3}, uniqueness: true
   belongs_to :user
   has_many :reviews, dependent: :destroy
@@ -7,5 +8,4 @@ class Restaurant < ActiveRecord::Base
     attributes[:user] ||= user
     reviews.build(attributes)
   end
-
 end
