@@ -11,15 +11,18 @@ end
 
 
 describe Restaurant, :type => :model do
-  it 'is not valid with a name of less than three characters' do
-    restaurant = Restaurant.new(name: 'kf')
-    expect(restaurant).to have(1).error_on(:name)
-    expect(restaurant).not_to be_valid
-  end
+  context 'validation' do
 
-  it 'does not accept restaurant unless unique' do
-    Restaurant.create(name: 'whatever')
-    restaurant = Restaurant.new(name: 'whatever')
-    expect(restaurant).to have(1).error_on(:name)
+    it 'is not valid with a name of less than three characters' do
+      restaurant = Restaurant.new(name: 'kf')
+      expect(restaurant).to have(1).error_on(:name)
+      expect(restaurant).not_to be_valid
+    end
+
+    it 'does not accept restaurant unless unique' do
+      Restaurant.create(name: 'whatever')
+      restaurant = Restaurant.new(name: 'whatever')
+      expect(restaurant).to have(1).error_on(:name)
+    end
   end
 end
