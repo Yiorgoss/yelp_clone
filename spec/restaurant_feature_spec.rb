@@ -99,13 +99,39 @@ feature 'restaurants' do
       expect(page).to have_content 'Log in'
     end
 
-    # it 'can only edit restaurants which they have created' do
+    it 'can only edit restaurants which they have created' do
+      click_link 'Add Restaurant'
+      fill_in 'Name', with: 'test'
+      click_button 'Create Restaurant'
+      click_link 'Sign out'
 
-    # end
+      click_link 'Sign up'
+      fill_in 'user_email', with: 'test@email.com'
+      fill_in 'user_password', with: '12345678'
+      fill_in 'user_password_confirmation', with: '12345678'
+      click_button 'Sign up'
+      click_link 'Edit test'
 
-    # it 'users can only leave 1 review per restaurant' do
+      expect(page).to have_content 'Not your reply. Can\'t edit'
+    end
 
-    # end
+    it 'can only leave 1 review per restaurant' do
+
+
+      click_link 'Review KFC'
+      fill_in 'Thoughts', with: 'so so'
+      select '3', from: 'Rating'
+      click_button "Leave Review"
+
+      click_link 'Review KFC'
+      fill_in 'Thoughts', with: 'whatever'
+      select '4', from: 'Rating'
+      click_button 'Leave Review'
+
+      expect(page).to have_content 'so so'
+      expect(page).to have_content 'Cannot review a restaurant twice!'
+      expect(page).not_to have_content 'whatever'
+    end
 
     # it 'can only delete their own reviews' do
 
