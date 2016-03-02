@@ -25,11 +25,7 @@ context 'creating restaurants' do
   scenario 'prompts user to fill out a form, then displays the new restaurant' do
     visit '/restaurants'
 
-    click_link 'Sign up'
-    fill_in 'Email', with: 'yo@random.com'
-    fill_in 'Password', with: 'password123'
-    fill_in 'Password confirmation', with: 'password123'
-    click_button 'Sign up'
+    sign_up
 
     click_link 'Add a restaurant'
     fill_in 'Name', with: 'KFC'
@@ -58,11 +54,7 @@ context 'deleting restaurants' do
   scenario 'removes a restaurant when a user clicks a delete link' do
     visit '/restaurants'
 
-    click_link 'Sign up'
-    fill_in 'Email', with: 'yo@random.com'
-    fill_in 'Password', with: 'password123'
-    fill_in 'Password confirmation', with: 'password123'
-    click_button 'Sign up'
+    sign_up
 
     click_link 'Delete KFC'
     expect(page).not_to have_content 'KFC'
@@ -74,11 +66,7 @@ context 'an invalid restaurant' do
   it 'does not let you submit a name that is too short' do
     visit '/restaurants'
 
-    click_link 'Sign up'
-    fill_in 'Email', with: 'yo@random.com'
-    fill_in 'Password', with: 'password123'
-    fill_in 'Password confirmation', with: 'password123'
-    click_button 'Sign up'
+    sign_up
     
     click_link 'Add a restaurant'
     fill_in 'Name', with: 'kf'

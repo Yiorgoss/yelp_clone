@@ -1,6 +1,9 @@
 class ReviewsController < ApplicationController
   def new
     @restaurant = Restaurant.find(params[:restaurant_id])
+    if current_user.has_reviewed? @restaurant
+      flash[:notice] = 'You have already reviewed this restaurant'
+    end
     @review = Review.new
   end
 
