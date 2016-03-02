@@ -5,7 +5,7 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @restaurant = Restaurant.find review_params[:restaurant_id]
+    @restaurant = Restaurant.find(params[:restaurant_id])
     @review = @restaurant.build_review review_params, current_user
 
     if @review.save
@@ -23,6 +23,6 @@ class ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:thoughts, :rating)
+    params.require(:review).permit(:thoughts, :rating, :restaurant_id)
   end
 end
