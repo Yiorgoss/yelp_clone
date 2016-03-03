@@ -1,4 +1,5 @@
 def sign_up
+  visit '/'
   click_link 'Sign up'
   fill_in 'Email', with: 'yo@random.com'
   fill_in 'Password', with: 'password123'
