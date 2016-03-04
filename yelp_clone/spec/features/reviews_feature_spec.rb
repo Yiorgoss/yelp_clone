@@ -60,7 +60,6 @@ feature 'reviewing' do
     expect(page).to have_content('Can\'t delete')
   end
 
-
   scenario 'displays an average rating for all reviews' do
     visit '/'
     sign_up
