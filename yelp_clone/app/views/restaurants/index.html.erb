@@ -8,7 +8,7 @@
       <ul>
         <% restaurant.reviews.each do |review| %>
         <%= link_to "Delete review", review_path( review), method: :delete %>
-        <p><%= pluralize review.endorsements.count, 'endorsement' %></p>
+        <p><%= pluralize review.endorsements.count, 'endorsement' %> </p> <%= link_to "Endorse Review", review_endorsements_path(review), method: :post %>
 
           <li>
             <h3>Average rating: <%= star_rating(restaurant.average_rating) %></h3>
